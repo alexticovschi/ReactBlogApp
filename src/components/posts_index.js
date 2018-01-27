@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
 
 // After the component is rendered in the DOM, the action creator
@@ -13,7 +14,7 @@ class PostsIndex extends Component {
     this.props.fetchPosts();
   }
 
-  
+
   // Map over the list of posts and generate one <li> for every post that is fetched
   // To map over the object that contains different posts, use lodash map function
   //   which has the ability to deal with objects.
@@ -32,6 +33,11 @@ class PostsIndex extends Component {
   render () {
     return (
       <div>
+        <div className="text-xs-right">
+          <Link className="btn btn-primary" to="/posts/new">
+            Add a Post
+          </Link>
+        </div>
         <h3>Posts</h3>
         <ul className="list-group">
           {this.renderPosts()}
