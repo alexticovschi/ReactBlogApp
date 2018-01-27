@@ -3,11 +3,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
 
+// After the component is rendered in the DOM, the action creator
+//  is called to go and fetch the list of posts
+// After the ajax request is complete the action creator finishes, the 
+//  promise resolves, the state is recalculated and the component rerenders
+//  with a list of posts
 class PostsIndex extends Component {
   componentDidMount() {
     this.props.fetchPosts();
   }
 
+  
+  // Map over the list of posts and generate one <li> for every post that is fetched
+  // To map over the object that contains different posts, use lodash map function
+  //   which has the ability to deal with objects.
+  //   Call map on an object, pass in the second function (the mapping function) and
+  //   return an array, exactly what react needs when a list of components is rendered 
   renderPosts() {
     return _.map(this.props.posts, post => {
       return (
