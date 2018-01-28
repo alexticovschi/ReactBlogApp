@@ -2,16 +2,22 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
 class PostsNew extends Component {
-
+  // The field object represents a single input or a single piece 
+  //   of state that we are attempting to communicate to the user
   renderField(field) {
+    // console.log(field, typeof field);
+    // console.log(field.meta.error);
     return (
       <div className="form-group">
       <label htmlFor="title">{field.label}</label>
         <input 
-          className="form-control"
+          className="form-control"  
           type="text"
           {...field.input}
         />
+        {/* this meta.error property is automatically added to the
+         field object from the validate function   */}
+        {field.meta.error}
       </div>
     );
   }
@@ -51,9 +57,6 @@ function validate(values) {
   // At first, the values object is empty. Then a particular value on the values object 
   //   is checked and if this is not valid, then add a property to the errors object
   //   and assign it a message that will be displayed to the user
-  if (values.title.length < 3) {
-    errors.title = "Enter a title that is at least 3 characters!";
-  }
   if (!values.title) {
     errors.title = "Enter a title!";
   }
