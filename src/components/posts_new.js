@@ -16,17 +16,28 @@ class PostsNew extends Component {
           {...field.input}
         />
         {/* this meta.error property is automatically added to the
-         field object from the validate function   */}
+         field object from the validate function */}
         {field.meta.error}
       </div>
     );
   }
 
+  onSubmit(values) {
+    console.log(values);
+  }
 
   render() {
+    // handleSubmit is a property that is being passed to the component on behalf of redux form 
+    const { handleSubmit } = this.props;
+
     return (
       <div>
-        <form>
+        {/* Redux form is just responsible for handling the state and validation of the form */}
+        {/* handleSubmit takes a defined function and runs the redux form of things like validation.
+            Redux form will check if the form is valid and ready to be submitted, and then the callback
+            function 'this.onSubmit' will be called and it will pass the values out of the form to work with */}
+
+        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           {/* the Field component is responsible for event handling and updating our different pieces of state */}
           <Field
             label="Title for Post" 
@@ -43,6 +54,7 @@ class PostsNew extends Component {
             name="content"
             component={this.renderField}
           />
+          <button type="submit" className="btn btn-primary">Submit</button>
         </form>
       </div>
     );
