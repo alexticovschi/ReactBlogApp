@@ -5,11 +5,12 @@ class PostsNew extends Component {
   // The field object represents a single input or a single piece 
   //   of state that we are attempting to communicate to the user
   renderField(field) {
-    const className = `form-group ${field.meta.touched && field.meta.error ? 'has-danger' : ''}`;
+    const { meta: { touched, error } } = field;
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
 
     return (
       <div className={className}>
-        <label htmlFor="title">{field.label}</label>
+        <label>{field.label}</label>
         <input 
           className="form-control"  
           type="text"
@@ -18,7 +19,7 @@ class PostsNew extends Component {
         <div className="text-danger">
           {/* this meta.error property is automatically added to the field object from the validate function */}
           {/* If the user has touched a field, show the error, otherwise show an empty string */}
-          { field.meta.touched ? field.meta.error : '' }
+          { touched ? error : '' }
         </div>      
       </div>
     );
