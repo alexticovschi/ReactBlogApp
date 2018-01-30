@@ -17,7 +17,8 @@ class PostsNew extends Component {
         />
         {/* this meta.error property is automatically added to the
          field object from the validate function */}
-        {field.meta.error}
+         {/* If the user has touched a field, show the error, otherwise show an empty string */}
+        { field.meta.touched ? field.meta.error : '' }
       </div>
     );
   }
