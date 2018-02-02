@@ -22,11 +22,15 @@ export function fetchPosts() {
   };
 }
 
-export function createPost(values) {
+// 1. Make the API request
+// 2. After the API request has been successfully completed execute the callback function
+//   # the callback function is responsible for executing the following code: 
+//     'this.props.history.push('/');' which will send the user to the list of posts
+export function createPost(values, callback) {
   // In this get request a URL is provided as the first argument and then the second argument
   //  is the object or the data that we want to send to the remote API
-  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
-
+  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+    .then(() => callback());
   return {
     type: CREATE_POST,
     payload: request

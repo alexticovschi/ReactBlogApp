@@ -28,8 +28,15 @@ class PostsNew extends Component {
     );
   }
 
+  // When the user clicks the Submit button the order of operations is the following
+  // 1. A new post is created (POST request)
+  // 2. A response is received (GET request)
+  // 3. Then we navigate to the list of posts 
   onSubmit(values) {
-    this.props.createPost(values);
+    this.props.createPost(values, () => {
+      // navigate back to the list of posts(i.e. go back to the root route of the application)
+      this.props.history.push('/');
+    });
   }
 
   render() {
